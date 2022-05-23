@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textViewThing;
     SharedPreferences preferences;
+    private Button start_Second_Activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +30,12 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("name", "Tilda");
         editor.apply();
 
-        Button button = findViewById(R.id.start_second_activity);
-        button.setOnClickListener(new View.OnClickListener() {
+        start_Second_Activity = findViewById(R.id.start_second_activity);
+        start_Second_Activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, second_activity.class);
-                intent.putExtra("name", "Tilda");
                 startActivity(intent);
-
             }
         });
 
