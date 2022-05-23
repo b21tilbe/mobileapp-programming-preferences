@@ -6,11 +6,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class second_activity extends AppCompatActivity {
 
     SharedPreferences preferences;
+    EditText editing_Text;
+    private Button close_Second_Activity;
 
 
     @Override
@@ -18,24 +21,20 @@ public class second_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
 
-        TextView textView = findViewById(R.id.name);
+        editing_Text = findViewById(R.id.editing_text);
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String name = extras.getString("name");
-            textView.setText(name);
-
-        }
-
-        Button close = findViewById(R.id.close_second_activity);
-        close.setOnClickListener(new View.OnClickListener() {
-
+        close_Second_Activity = findViewById(R.id.close_second_activity);
+        close_Second_Activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("name", editing_Text.getText().toString());
+                editor.apply();
+
                 finish();
             }
-
         });
     }
 }

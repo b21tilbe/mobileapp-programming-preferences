@@ -1,6 +1,7 @@
 package com.example.project;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,14 +27,12 @@ public class MainActivity extends AppCompatActivity {
         textViewThing = findViewById(R.id.name);
 
         preferences = getSharedPreferences("preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("name", "Tilda");
-        editor.apply();
 
         start_Second_Activity = findViewById(R.id.start_second_activity);
         start_Second_Activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("--", "onClick: ");
                 Intent intent = new Intent(MainActivity.this, second_activity.class);
                 startActivity(intent);
             }
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         String name = preferences.getString("name", "inget namn hittades");
         textViewThing .setText(name);
     }
